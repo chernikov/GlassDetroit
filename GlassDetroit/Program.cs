@@ -1,3 +1,4 @@
+using ApplicationCore.Model;
 using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
