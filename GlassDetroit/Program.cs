@@ -1,8 +1,9 @@
 using Newtonsoft.Json;
+using System.Reflection.PortableExecutable;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
-
 
 app.MapGet("/items", () =>
 {
@@ -14,6 +15,28 @@ app.MapGet("/items", () =>
     }
 });
 
+app.MapGet("/item", async (context) =>
+    {   
+        context.Response.ContentType = "text/html; charset=utf-8";        
+        await context.Response.SendFileAsync("html/index.html");    
+    });
+
+app.MapGet("/home", async (context) =>
+{
+    context.Response.ContentType = "text/html; charset=utf-8";
+    var stringBuilder = new System.Text.StringBuilder("<table>");
+    using (var db = new Context())
+    {
+        foreach (var item in db.Items)
+        {
+            stringBuilder.Append($"<tr><td>{item.FirstName}</td><td>{item.LastName}</td></tr>");
+        }
+    }
+    stringBuilder.Append("</table>");
+    await context.Response.WriteAsync(stringBuilder.ToString());   
+});
+
+
 app.MapPost("/items", async (Item item) =>
     {
         using (var context = new Context())
@@ -23,5 +46,12 @@ app.MapPost("/items", async (Item item) =>
         }
         return "OK";
     });
+
+
+//app.Run(async (context) =>
+//{
+//    context.Response.ContentType = "text/html; charset=utf-8";
+//    await context.Response.SendFileAsync("html/index.html");
+//});
 
 app.Run();
