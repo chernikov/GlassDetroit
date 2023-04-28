@@ -6,52 +6,19 @@
     </head>
     <body>
         <div>
-            <input type="hidden" id="Id" />
-            <p>
-                ID:<input id="itemID" />
-            </p>
-            <p>
-                FirstName:<input id="FirstName" />
-            </p>
-            <p>
-                LastName:<input id="LastName" />
-            </p>
-            <p>
-                Phone:<input id="Phone" />
-            </p>
-            <p>
-                Title:<input id="Title" />
-            </p>
-            <p>
-                Size:<input id="Size" type="number" />
-            </p>
-            <p>
-                Price:<input id="Price" type="number" />
-            </p>
-            <p>
-                Total:<input id="Total" type="number" />
-            </p>
-            <p>
-                Description:<input id="Description" type="number" />
-            </p>
-            <p>
-                <button id="saveBtn">Зберегти</button>
-            </p>
-        </div>
-        <h2>List of Items</h2>
-        <script>           
-            async function getItems() {          
-                const response = await fetch("/items", {
-                    method: "GET",
-                    headers: { "Accept": "application/json" }
-                });              
-                if (response.ok === true) {            
-                    document.getElementById("FirstName").value = +response.text;
-                    document.getElementById("LastName").value = +response.responseText;
-                }
-            }
-            getItems();
-        </script>
-
+            <form method="post" action="item">     
+                <p>ID: <input name="Id" /></p>
+                <p>FirstName: <input name="FirstName" /></p>
+                <p>LastName: <input name="LastName" /></p>
+                <p>Phone: <input name="Phone" /></p>
+                <p>Title: <input name="Title" /></p>
+                <p>Size: <input name="Size" /></p>
+                <p>Price: <input name="Price" /></p>
+                <p>Total: <input name="Total" /></p>
+                <p>Description: <input name="Description" /></p>                   
+                <input type="submit"/>                
+            </form>
+        </div>  
+        
     </body>
 </html>
