@@ -21,6 +21,8 @@ namespace GlassDetroitMVC.Controllers
         // GET: Items
         public async Task<IActionResult> Index()
         {
+            var context = _context;
+            var items = context.Items.ToList();
               return _context.Items != null ? 
                           View(await _context.Items.ToListAsync()) :
                           Problem("Entity set 'Context.Items'  is null.");
