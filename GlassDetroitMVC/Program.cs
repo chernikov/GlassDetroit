@@ -1,4 +1,4 @@
-using GlassDetroitMVC.Models;
+using GlassDetroitMVC;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -12,7 +12,7 @@ var connectionString = builder.Configuration["ConnectionString:"+ developer +"Co
 Console.WriteLine(connectionString);
 
 // Add services to the container.
-builder.Services.AddDbContext<Context>(options =>
+builder.Services.AddDbContext<GlassDetroitContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddControllersWithViews();
 
